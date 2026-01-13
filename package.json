@@ -16,7 +16,7 @@
   "scripts": {
     "build": "npm run clean && tsc && node esbuild.config.js",
     "clean": "rimraf dist",
-    "prepublish": "NODE_ENV=production npm run build"
+    "prepublishOnly": "NODE_ENV=production npm run build"
   },
   "keywords": [
     "electron",
@@ -33,6 +33,8 @@
   "author": "Samuel Maddock <sam@samuelmaddock.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.0.0",
+    "electron": "^37.1.0",
     "esbuild": "^0.24.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.6.3"
