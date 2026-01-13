@@ -10,7 +10,7 @@ export interface ExtensionInstallDetails {
 }
 
 export type BeforeInstall = (
-  details: ExtensionInstallDetails,
+  details: ExtensionInstallDetails
 ) => Promise<{ action: 'allow' | 'deny' }>
 
 export type AfterInstall = (details: { id: string; manifest: chrome.runtime.Manifest }) => void
@@ -24,13 +24,13 @@ export type AfterUninstall = (details: {
 export type CustomSetExtensionEnabled = (
   state: WebStoreState,
   extensionId: string,
-  enabled: boolean,
+  enabled: boolean
 ) => Promise<boolean>
 
 export type OverrideExtensionInstallStatus = (
   state: WebStoreState,
   extensionId: string,
-  manifest?: chrome.runtime.Manifest,
+  manifest?: chrome.runtime.Manifest
 ) => string | undefined
 
 export interface WebStoreState {

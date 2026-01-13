@@ -8,7 +8,7 @@ import {
   ExtensionInstallStatus,
   MV2DeprecationStatus,
   Result,
-  WebGlStatus,
+  WebGlStatus
 } from '../common/constants'
 import { installExtension, uninstallExtension } from './installer'
 import { ExtensionId, WebStoreState } from './types'
@@ -26,7 +26,7 @@ function getExtensionInfo(ext: Electron.Extension) {
     hostPermissions: manifest.host_permissions || [],
     icons: Object.entries(manifest?.icons || {}).map(([size, url]) => ({
       size: parseInt(size),
-      url: `chrome://extension-icon/${ext.id}/${size}/0`,
+      url: `chrome://extension-icon/${ext.id}/${size}/0`
     })),
     id: ext.id,
     installType: 'normal',
@@ -41,14 +41,14 @@ function getExtensionInfo(ext: Electron.Extension) {
     shortName: manifest.short_name || manifest.name,
     type: manifest.app ? 'app' : 'extension',
     updateUrl: manifest.update_url || '',
-    version: manifest.version,
+    version: manifest.version
   }
 }
 
 function getExtensionInstallStatus(
   state: WebStoreState,
   extensionId: ExtensionId,
-  manifest?: chrome.runtime.Manifest,
+  manifest?: chrome.runtime.Manifest
 ) {
   // Allow custom override of install status
   if (state.overrideExtensionInstallStatus) {
@@ -96,7 +96,7 @@ interface InstallDetails {
 async function beginInstall(
   { sender, senderFrame }: Electron.IpcMainInvokeEvent,
   state: WebStoreState,
-  details: InstallDetails,
+  details: InstallDetails
 ) {
   const extensionId = details.id
 
@@ -152,7 +152,7 @@ async function beginInstall(
         manifest,
         icon,
         frame: senderFrame,
-        browserWindow: browserWindow || undefined,
+        browserWindow: browserWindow || undefined
       })
 
       if (typeof result !== 'object' || typeof (result as any).action !== 'string') {
@@ -169,7 +169,7 @@ async function beginInstall(
     console.error('Extension installation failed:', error)
     return {
       result: Result.INSTALL_ERROR,
-      message: error instanceof Error ? error.message : String(error),
+      message: error instanceof Error ? error.message : String(error)
     }
   } finally {
     state.installing.delete(extensionId)
@@ -183,7 +183,7 @@ export function registerWebStoreApi(webStoreState: WebStoreState) {
   /** Handle IPCs from the Chrome Web Store. */
   const handle = (
     channel: string,
-    handle: (event: Electron.IpcMainInvokeEvent, ...args: any[]) => any,
+    handle: (event: Electron.IpcMainInvokeEvent, ...args: any[]) => any
   ) => {
     let handlersMap = handledIpcChannels.get(channel)
 
@@ -274,7 +274,7 @@ export function registerWebStoreApi(webStoreState: WebStoreState) {
   handle('chromeWebstore.getFullChromeVersion', async () => {
     return {
       version_number: process.versions.chrome,
-      app_name: app.getName(),
+      app_name: app.getName()
     }
   })
 
@@ -383,6 +383,6 @@ export function registerWebStoreApi(webStoreState: WebStoreState) {
         console.error(error)
         return Result.UNKNOWN_ERROR
       }
-    },
+    }
   )
 }

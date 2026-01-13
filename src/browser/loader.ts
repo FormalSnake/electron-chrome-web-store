@@ -70,12 +70,12 @@ async function discoverExtensions(extensionsPath: string): Promise<ExtensionPath
             type: 'store' as const,
             path: extPath!,
             manifest,
-            id: generateId(manifest.key),
+            id: generateId(manifest.key)
           }
         : {
             type: 'unpacked' as const,
             path: extPath!,
-            manifest,
+            manifest
           }
       results.push(result)
     } catch (e) {
@@ -123,7 +123,7 @@ export async function loadAllExtensions(
   extensionsPath: string,
   options: {
     allowUnpacked?: boolean
-  } = {},
+  } = {}
 ) {
   const sessionExtensions = session.extensions || session
 

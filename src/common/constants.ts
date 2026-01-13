@@ -11,13 +11,13 @@ export const ExtensionInstallStatus = {
   FORCE_INSTALLED: 'force_installed',
   INSTALLABLE: 'installable',
   REQUEST_PENDING: 'request_pending',
-  TERMINATED: 'terminated',
+  TERMINATED: 'terminated'
 }
 
 export const MV2DeprecationStatus = {
   INACTIVE: 'inactive',
   SOFT_DISABLE: 'soft_disable',
-  WARNING: 'warning',
+  WARNING: 'warning'
 }
 
 export const Result = {
@@ -38,10 +38,10 @@ export const Result = {
   UNKNOWN_ERROR: 'unknown_error',
   UNSUPPORTED_EXTENSION_TYPE: 'unsupported_extension_type',
   USER_CANCELLED: 'user_cancelled',
-  USER_GESTURE_REQUIRED: 'user_gesture_required',
+  USER_GESTURE_REQUIRED: 'user_gesture_required'
 }
 
 export const WebGlStatus = {
   WEBGL_ALLOWED: 'webgl_allowed',
-  WEBGL_BLOCKED: 'webgl_blocked',
+  WEBGL_BLOCKED: 'webgl_blocked'
 }

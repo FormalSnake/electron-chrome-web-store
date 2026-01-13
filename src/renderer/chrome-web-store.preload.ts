@@ -3,7 +3,7 @@ import {
   ExtensionInstallStatus,
   MV2DeprecationStatus,
   Result,
-  WebGlStatus,
+  WebGlStatus
 } from '../common/constants'
 
 interface WebstorePrivate {
@@ -14,7 +14,7 @@ interface WebstorePrivate {
 
   beginInstallWithManifest3: (
     details: unknown,
-    callback?: (result: string) => void,
+    callback?: (result: string) => void
   ) => Promise<string>
   completeInstall: (id: string, callback?: (result: string) => void) => Promise<string>
   enableAppLauncher: (enable: boolean, callback?: (result: boolean) => void) => Promise<boolean>
@@ -22,7 +22,7 @@ interface WebstorePrivate {
   getExtensionStatus: (
     id: string,
     manifestJson: string,
-    callback?: (status: string) => void,
+    callback?: (status: string) => void
   ) => Promise<string>
   getFullChromeVersion: (callback?: (result: string) => void) => Promise<{
     version_number: string
@@ -36,7 +36,7 @@ interface WebstorePrivate {
   install: (
     id: string,
     silentInstall: boolean,
-    callback?: (result: string) => void,
+    callback?: (result: string) => void
   ) => Promise<string>
   isInIncognitoMode: (callback?: (result: boolean) => void) => Promise<boolean>
   isPendingCustodianApproval: (id: string, callback?: (result: boolean) => void) => Promise<boolean>
@@ -47,7 +47,7 @@ function updateBranding(appName: string) {
   const update = () => {
     requestAnimationFrame(() => {
       const chromeButtons = Array.from(document.querySelectorAll('span')).filter((node) =>
-        node.innerText.includes('Chrome'),
+        node.innerText.includes('Chrome')
       )
 
       for (const button of chromeButtons) {
@@ -72,7 +72,7 @@ function overrideUserAgent() {
   webFrame.executeJavaScript(
     `(${function (userAgent: string) {
       Object.defineProperty(navigator, 'userAgent', { value: userAgent })
-    }})(${JSON.stringify(userAgent)});`,
+    }})(${JSON.stringify(userAgent)});`
   )
 }
 
@@ -240,7 +240,7 @@ function setupChromeWebStoreApi() {
       log('webstorePrivate.setStoreLogin result:', result)
       if (callback) callback(result)
       return result
-    },
+    }
   }
 
   // Expose webstorePrivate API
@@ -252,7 +252,7 @@ function setupChromeWebStoreApi() {
     getManifest: async () => {
       log('chrome.runtime.getManifest called')
       return {}
-    },
+    }
   }
   contextBridge.exposeInMainWorld('electronRuntime', runtime)
 
@@ -265,7 +265,7 @@ function setupChromeWebStoreApi() {
       removeListener: (callback: () => void) => {
         log('chrome.management.onInstalled.removeListener called')
         ipcRenderer.removeListener('chrome.management.onInstalled', callback)
-      },
+      }
     },
     onUninstalled: {
       addListener: (callback: () => void) => {
@@ -275,7 +275,7 @@ function setupChromeWebStoreApi() {
       removeListener: (callback: () => void) => {
         log('chrome.management.onUninstalled.removeListener called')
         ipcRenderer.removeListener('chrome.management.onUninstalled', callback)
-      },
+      }
     },
     getAll: (callback: (extensions: any[]) => void) => {
       log('chrome.management.getAll called')
@@ -296,7 +296,7 @@ function setupChromeWebStoreApi() {
         log('chrome.management.uninstall result:', result)
         if (callback) callback()
       })
-    },
+    }
   }
   contextBridge.exposeInMainWorld('electronManagement', management)
 

@@ -115,9 +115,9 @@ async function fetchAvailableUpdates(extensions: Electron.Extension[]): Promise<
   const extensionMap: Record<string, Electron.Extension> = extensions.reduce(
     (map, ext) => ({
       ...map,
-      [ext.id]: ext,
+      [ext.id]: ext
     }),
-    {},
+    {}
   )
 
   const chromeVersion = getChromeVersion()
@@ -132,21 +132,21 @@ async function fetchAvailableUpdates(extensions: Electron.Extension[]): Promise<
       app: [
         ...extensions.map((extension) => ({
           appid: extension.id,
-          updatecheck: {},
+          updatecheck: {}
           // API always reports 'noupdate' when version is set :thinking:
           // version: extension.version,
-        })),
+        }))
       ],
       os: {
         platform: getOmahaPlatform(),
-        arch: getOmahaArch(),
+        arch: getOmahaArch()
       },
       prodversion: chromeVersion,
       protocol: '3.1',
       requestid: crypto.randomUUID(),
       sessionid: getSessionId(),
-      testsource: process.env.NODE_ENV === 'production' ? '' : 'electron_dev',
-    },
+      testsource: process.env.NODE_ENV === 'production' ? '' : 'electron_dev'
+    }
   }
 
   const response = await fetch(url, {
@@ -155,9 +155,9 @@ async function fetchAvailableUpdates(extensions: Electron.Extension[]): Promise<
       'content-type': 'application/json',
       'X-Goog-Update-Interactivity': 'bg',
       'X-Goog-Update-AppId': extensionIds.join(','),
-      'X-Goog-Update-Updater': `chromiumcrx-${chromeVersion}`,
+      'X-Goog-Update-Updater': `chromiumcrx-${chromeVersion}`
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   })
 
   if (!response.ok) {
@@ -193,7 +193,7 @@ async function fetchAvailableUpdates(extensions: Electron.Extension[]): Promise<
           id: extensionId,
           version: manifest.version,
           name: pkg.name,
-          url: app.updatecheck.urls!.url[0].codebase,
+          url: app.updatecheck.urls!.url[0].codebase
         }
       })
       // Remove extensions without newer version
@@ -222,8 +222,8 @@ async function updateExtension(session: Electron.Session, update: ExtensionUpdat
     console.error(
       `updateExtension: extension ${extensionId} must conform to versioned directory names`,
       {
-        oldPath: oldExtension.path,
-      },
+        oldPath: oldExtension.path
+      }
     )
     d('skipping %s update due to invalid install path %s', extensionId, oldExtension.path)
     return
@@ -276,7 +276,7 @@ async function installUpdates(session: Electron.Session, updates: ExtensionUpdat
  * Check session's loaded extensions for updates and install any if available.
  */
 export async function updateExtensions(
-  session: Electron.Session = electronSession.defaultSession,
+  session: Electron.Session = electronSession.defaultSession
 ): Promise<void> {
   const updates = await checkForUpdates(session)
   if (updates.length > 0) {

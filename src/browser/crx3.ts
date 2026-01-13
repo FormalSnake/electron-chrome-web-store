@@ -22,9 +22,9 @@ export function readCrxFileHeader(pbf: Pbf, end?: any): CrxFileHeader {
       sha256_with_rsa: [],
       sha256_with_ecdsa: [],
       verified_contents: undefined,
-      signed_header_data: undefined,
+      signed_header_data: undefined
     },
-    end,
+    end
   )
 }
 function readCrxFileHeaderField(tag: any, obj: any, pbf: Pbf) {
@@ -39,7 +39,7 @@ export function readAsymmetricKeyProof(pbf: Pbf, end: any) {
   return pbf.readFields(
     readAsymmetricKeyProofField,
     { public_key: undefined, signature: undefined },
-    end,
+    end
   )
 }
 function readAsymmetricKeyProofField(tag: any, obj: any, pbf: Pbf) {

@@ -9,7 +9,7 @@ export const fetch =
   net?.fetch ||
   (() => {
     throw new Error(
-      'electron-chrome-web-store: Missing fetch API. Please upgrade Electron or Node.',
+      'electron-chrome-web-store: Missing fetch API. Please upgrade Electron or Node.'
     )
   })
 export const getChromeVersion = () => process.versions.chrome || '131.0.6778.109'

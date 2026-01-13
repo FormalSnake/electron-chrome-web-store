@@ -10,10 +10,10 @@ function createConfig(opts = {}) {
     opts.format === 'esm'
       ? {
           ...opts.define,
-          __dirname: 'import.meta.dirname',
+          __dirname: 'import.meta.dirname'
         }
       : {
-          ...opts.define,
+          ...opts.define
         }
   return {
     bundle: true,
@@ -25,10 +25,10 @@ function createConfig(opts = {}) {
     loader: {
       '.ts': 'ts',
       '.tsx': 'tsx',
-      '.css': 'css',
+      '.css': 'css'
     },
     ...opts,
-    define,
+    define
   }
 }
 
@@ -46,7 +46,7 @@ const EXTERNAL_BASE = [
   'node:stream',
   'node:stream/promises',
   'electron',
-  'debug',
+  'debug'
 ]
 
 const external = [...EXTERNAL_BASE, 'adm-zip', 'pbf', 'electron-chrome-web-store/preload']
@@ -57,7 +57,7 @@ const browserConfig = createConfig({
   entryPoints: ['src/browser/index.ts'],
   outfile: 'dist/cjs/browser/index.js',
   platform: 'node',
-  external: external.filter((module) => !esmOnlyModules.includes(module)),
+  external: external.filter((module) => !esmOnlyModules.includes(module))
 })
 
 const browserESMConfig = createConfig({
@@ -65,7 +65,7 @@ const browserESMConfig = createConfig({
   outfile: 'dist/esm/browser/index.mjs',
   platform: 'neutral',
   external,
-  format: 'esm',
+  format: 'esm'
 })
 
 build(browserConfig)
@@ -76,7 +76,7 @@ const preloadConfig = createConfig({
   outfile: 'dist/chrome-web-store.preload.js',
   platform: 'browser',
   external,
-  sourcemap: false,
+  sourcemap: false
 })
 
 build(preloadConfig)

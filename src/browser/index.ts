@@ -17,7 +17,7 @@ import {
   CustomSetExtensionEnabled,
   ExtensionId,
   OverrideExtensionInstallStatus,
-  WebStoreState,
+  WebStoreState
 } from './types'
 
 function resolvePreloadPath(modulePath?: string) {
@@ -36,7 +36,7 @@ function resolvePreloadPath(modulePath?: string) {
   if (modulePath) {
     process.emitWarning(
       'electron-chrome-web-store: "modulePath" is deprecated and will be removed in future versions.',
-      { type: 'DeprecationWarning' },
+      { type: 'DeprecationWarning' }
     )
     return path.join(modulePath, 'dist', preloadFilename)
   }
@@ -166,7 +166,7 @@ export async function installChromeWebStore(opts: ElectronChromeWebStoreOptions 
     afterInstall,
     afterUninstall,
     customSetExtensionEnabled,
-    overrideExtensionInstallStatus,
+    overrideExtensionInstallStatus
   }
 
   // Add preload script to session
@@ -176,7 +176,7 @@ export async function installChromeWebStore(opts: ElectronChromeWebStoreOptions 
     session.registerPreloadScript({
       id: 'electron-chrome-web-store',
       type: 'frame',
-      filePath: preloadPath,
+      filePath: preloadPath
     })
   } else {
     // @ts-expect-error Deprecated electron@<35
@@ -187,8 +187,8 @@ export async function installChromeWebStore(opts: ElectronChromeWebStoreOptions 
     console.error(
       new Error(
         `electron-chrome-web-store: Preload file not found at "${preloadPath}". ` +
-          'See "Packaging the preload script" in the readme.',
-      ),
+          'See "Packaging the preload script" in the readme.'
+      )
     )
   }
 

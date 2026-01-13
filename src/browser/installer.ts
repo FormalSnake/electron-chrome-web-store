@@ -97,7 +97,7 @@ function parseCrx(buffer: Buffer): CrxInfo {
     version,
     header,
     contents,
-    publicKey,
+    publicKey
   }
 }
 
@@ -142,7 +142,7 @@ async function downloadCrx(url: string, dest: string) {
 export async function downloadExtensionFromURL(
   url: string,
   extensionsDir: string,
-  expectedExtensionId?: string,
+  expectedExtensionId?: string
 ): Promise<string> {
   d('downloading %s', url)
 
@@ -155,7 +155,7 @@ export async function downloadExtensionFromURL(
 
     if (expectedExtensionId && expectedExtensionId !== crx.extensionId) {
       throw new Error(
-        `CRX mismatches expected extension ID: ${expectedExtensionId} !== ${crx.extensionId}`,
+        `CRX mismatches expected extension ID: ${expectedExtensionId} !== ${crx.extensionId}`
       )
     }
 
@@ -181,7 +181,7 @@ export async function downloadExtensionFromURL(
  */
 export async function downloadExtension(
   extensionId: string,
-  extensionsDir: string,
+  extensionsDir: string
 ): Promise<string> {
   const url = getExtensionCrxURL(extensionId)
   return await downloadExtensionFromURL(url, extensionsDir, extensionId)
@@ -210,7 +210,7 @@ interface UninstallExtensionOptions extends CommonExtensionOptions {}
  */
 export async function installExtension(
   extensionId: string,
-  opts: InstallExtensionOptions = {},
+  opts: InstallExtensionOptions = {}
 ): Promise<Electron.Extension> {
   d('installing %s', extensionId)
 
@@ -231,7 +231,7 @@ export async function installExtension(
     d('%s already installed', extensionId)
     return await sessionExtensions.loadExtension(
       existingExtensionInfo.path,
-      opts.loadExtensionOptions,
+      opts.loadExtensionOptions
     )
   }
 
@@ -248,7 +248,7 @@ export async function installExtension(
  */
 export async function uninstallExtension(
   extensionId: string,
-  opts: UninstallExtensionOptions = {},
+  opts: UninstallExtensionOptions = {}
 ) {
   d('uninstalling %s', extensionId)
 
